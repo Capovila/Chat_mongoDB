@@ -9,7 +9,7 @@ class User:
 
 
 class Message:
-    def __init__(self, nickname_from: str, nickname_to: str, content: str):
-        self.nickname_from = nickname_from
-        self.nickname_to = nickname_to
+    def __init__(self, email_from: str, email_to: str, content: str):
+        self.email_from = email_from
+        self.email_to = email_to
         self.content = content
