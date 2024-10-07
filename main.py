@@ -40,9 +40,8 @@ if __name__ == '__main__':
         if option == "1":
             os.system('cls')
             while True: 
-                print("Enviando uma mensagem")
-
-                email_to = input("\nInsira o email de quem você deseja enviar uma mensagem: ")
+                print("Sending a message")
+                email_to = input("\nInsert the email to whom you desire to send a message: ")
 
                 if (not operator.verify_email(email_to)):
                     print("No user using this email. Try again...")
@@ -50,11 +49,11 @@ if __name__ == '__main__':
                 
             os.system('cls')
             while True:
-                print("Enviando uma mensagem")
+                print("Sending a message")
 
-                msg_content = input("\nInsira a mensagem que deseja enviar: ")
+                msg_content = input("\nEnter the message: ")
 
-                if len(msg_content) > 0: #valida se a mensagem não é nula
+                if len(msg_content) > 0:
                     message = Message(user.email, email_to, cipher.encrypt(msg_content))
                     break
                 
@@ -62,9 +61,9 @@ if __name__ == '__main__':
                     
             os.system('cls')
             while True:
-                print("Enviando uma mensagem")
-                chaveCrip = input("\nInsira a chave de criptografia: ")
-                if chaveCrip == key: #aqui pode ser feita uma validação se a chave é valida
+                print("Sending a message")
+                chaveCrip = input("\nEnter the encryption key: ")
+                if chaveCrip == key:
                     operator.send_new_message(message)
                     break
 
@@ -73,12 +72,20 @@ if __name__ == '__main__':
                 os.system('cls') 
                 print("Reading Messages")
                 print("\nInbox: ")
-                print("\n1. dksadhsaj@gmail.com: olá, tudo bem?") #consulta e define prints para todos os resultados da consulta
-                print("2. asdsd@gmail.com: olá, como vai?")
-                print("3. lçiolçi@gmail.com: olá, bom dia.")
+                
+                messages = operator.get_messages(user.email)
 
-                sair = input("\nDeseja sair? (S/N): ")
-                if sair == "S": 
+                i = 0
+
+                if(not messages or len(messages) <= 0):
+                    print("Your inbox is empty.")
+                else:
+                    while i < len(messages):
+                        print('{}. From:{}\Message: {}\n'.format(i+1, messages[i]["email_from"], cipher.decrypt(messages[i]["content"])))
+                        i = i+1
+
+                sair = input("\nDo you want to back to the menu? (Y/N): ")
+                if sair == "Y" or sair == "y": 
                     break
 
         if option == "3":

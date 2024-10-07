@@ -29,3 +29,9 @@ class Operations:
     def send_new_message(self, message: Message):
         coll = self.get_db()["messages"]
         return coll.insert_one(message.__dict__).inserted_id
+    
+    def get_messages(self, email_to: str):
+        messages = self.get_db()["messages"].find({"email_to": email_to})
+        if messages:
+            return messages.to_list()
+        return False
