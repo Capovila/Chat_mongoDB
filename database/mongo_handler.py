@@ -9,12 +9,12 @@ class Operations:
         return MongoClient("mongodb+srv://root:123456qwerty@samples.gvdyi.mongodb.net/?retryWrites=true&w=majority"
                            "&appName=SAMPLES", tlsCAFile=certifi.where())
 
-    def authenticate(self, email: str, password: str) -> bool:
+    def authenticate(self, email: str, password: str):
         client = self.connect()
         db = client["chatpy"]
         user = db["users"].find_one({"email": email, "password": password})
         if user:
-            return True
+            return user
         else:
             return False
 
